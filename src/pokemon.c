@@ -47,6 +47,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
+#include "constants/region_map_sections.h"
 
 #define DAY_EVO_HOUR_BEGIN       12
 #define DAY_EVO_HOUR_END         HOURS_PER_DAY
@@ -55,6 +56,30 @@
 #define NIGHT_EVO_HOUR_END       12
 
 #define FRIENDSHIP_EVO_THRESHOLD 220
+
+
+//custom evo times
+#define CUSTOM_EVO_MORNING_START  6
+#define CUSTOM_EVO_MORNING_END    12
+#define CUSTOM_EVO_DAY_START      7
+#define CUSTOM_EVO_DAY_END        19
+
+#define CUSTOM_EVO_NIGHT_START    CUSTOM_EVO_DAY_END
+#define CUSTOM_EVO_NIGHT_END      CUSTOM_EVO_DAY_START
+
+#define CUSTOM_EVO_MIDNIGHT_PM    24
+#define CUSTOM_EVO_MIDNIGHT_AM     0
+
+#define CUSTOM_EVO_DUSK_START     19
+#define CUSTOM_EVO_DUSK_END       22
+
+// uncomment to use the above times as new evolution times, else default times will be used
+//#define CUSTOM_EVO_TIMES
+
+// required for `EVO_LEVEL_HOLD_ITEM` and `EVO_STONE_HOLD_ITEM`
+#define DEFINE_LEVEL_HOLD_ITEM      ITEM_POTION
+#define DEFINE_STONE_HOLD_ITEM      ITEM_SUPER_POTION
+
 
 struct SpeciesItem
 {
@@ -5488,7 +5513,7 @@ u8 GetNatureFromPersonality(u32 personality)
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
 {
-    int i;
+    int i, j;
     u16 targetSpecies = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
@@ -5503,6 +5528,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
     else
         holdEffect = GetItemHoldEffect(heldItem);
+
+    // prevent evolution with a flag
+    #ifdef FLAG_BLOCK_EVOLUTION
+        if(FlagGet(FLAG_BLOCK_EVOLUTION))
+           return SPECIES_NONE;
+    #else
+    #endif
 
     // Prevent evolution with Everstone, unless we're just viewing the party menu with an evolution item
     if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE && mode != EVO_MODE_ITEM_CHECK)
@@ -5523,15 +5555,31 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
-                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                break;
+                #ifndef CUSTOM_EVO_TIMES
+                    RtcCalcLocalTime();
+                    if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    break;
+                #else
+                    RtcCalcLocalTime();
+                    if (gLocalTime.hours >= CUSTOM_EVO_DAY_START && gLocalTime.hours < CUSTOM_EVO_DAY_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    break;
+				#endif
             case EVO_FRIENDSHIP_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+			    #ifndef CUSTOM_EVO_TIMES
+			        RtcCalcLocalTime();
+                    if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    break;
+                #else
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_MIDNIGHT_AM && gLocalTime.hours < CUSTOM_EVO_DAY_START && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                if (gLocalTime.hours >= CUSTOM_EVO_NIGHT_START && gLocalTime.hours < CUSTOM_EVO_MIDNIGHT_PM && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+                #endif
             case EVO_LEVEL:
                 if (gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
@@ -5567,6 +5615,173 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                 if (gEvolutionTable[species][i].param <= beauty)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_LEVEL_MALE:
+                if (gEvolutionTable[species][i].param <= level && GetMonGender(mon) == MON_MALE)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_FEMALE:
+                if (gEvolutionTable[species][i].param <= level && GetMonGender(mon) == MON_FEMALE)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_MALE_MORNING:
+                    RtcCalcLocalTime();
+                if (gEvolutionTable[species][i].param <= level && GetMonGender(mon) == MON_MALE && gLocalTime.hours >= CUSTOM_EVO_MORNING_START && gLocalTime.hours < CUSTOM_EVO_MORNING_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_FEMALE_MORNING:
+                    RtcCalcLocalTime();
+                if (gEvolutionTable[species][i].param <= level && GetMonGender(mon) == MON_FEMALE && gLocalTime.hours >= CUSTOM_EVO_MORNING_START && gLocalTime.hours < CUSTOM_EVO_MORNING_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_DAY:
+			#ifndef CUSTOM_EVO_TIMES
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            #else
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_DAY_START && gLocalTime.hours < CUSTOM_EVO_DAY_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			#endif
+            case EVO_LEVEL_NIGHT:
+			#ifndef CUSTOM_EVO_TIMES
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			#else
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_MIDNIGHT_AM && gLocalTime.hours < CUSTOM_EVO_NIGHT_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                if (gLocalTime.hours >= CUSTOM_EVO_NIGHT_START && gLocalTime.hours < CUSTOM_EVO_MIDNIGHT_PM && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			#endif
+            case EVO_LEVEL_MORNING:
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_MORNING_START && gLocalTime.hours < CUSTOM_EVO_MORNING_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_DUSK:
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_DUSK_START && gLocalTime.hours < CUSTOM_EVO_DUSK_END && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_HOLD_ITEM:
+                if (heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;
+            case EVO_HOLD_ITEM_DAY:
+            #ifndef CUSTOM_EVO_TIMES
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;
+			#else
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_DAY_START && gLocalTime.hours < CUSTOM_EVO_DAY_END && heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;
+            #endif
+            case EVO_HOLD_ITEM_NIGHT:
+			#ifndef CUSTOM_EVO_TIMES
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;			
+            #else
+                    RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_MIDNIGHT_AM && gLocalTime.hours < CUSTOM_EVO_NIGHT_END && heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                if (gLocalTime.hours >= CUSTOM_EVO_NIGHT_START && gLocalTime.hours < CUSTOM_EVO_MIDNIGHT_PM && heldItem == gEvolutionTable[species][i].param)
+                {
+                    heldItem = 0;
+                    SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;
+            #endif
+            case EVO_MOVE:
+                if (MonKnowsMove(mon, gEvolutionTable[species][i].param))
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_MOVE_TYPE:
+                for (j = 0; j < 4; j++)
+                {
+                    if (gBattleMoves[GetMonData(mon, MON_DATA_MOVE1 + j, NULL)].type == gEvolutionTable[species][i].param)
+                    {
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
+                    }
+                }
+                break;
+            case EVO_LEVEL_HOLD_ITEM:
+                if (gEvolutionTable[species][i].param <= level && heldItem == DEFINE_LEVEL_HOLD_ITEM)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_MON_IN_PARTY:
+                for (j = 0; j < PARTY_SIZE; j++)
+                {
+                    if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == gEvolutionTable[species][i].param)
+                    {
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                        break;
+                    }
+                }
+                break;
+            case EVO_ALOLA_LEVEL:
+				#ifdef ITEM_STRANGE_SOUVENIR
+                if (gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+				#else
+				#endif
+            case EVO_ALOLA_LEVEL_NIGHT:
+                #ifdef ITEM_STRANGE_SOUVENIR
+                #ifndef CUSTOM_EVO_TIMES
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+                #else
+                RtcCalcLocalTime();
+                if (gLocalTime.hours >= CUSTOM_EVO_MIDNIGHT_AM && gLocalTime.hours < CUSTOM_EVO_NIGHT_END && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                if (gLocalTime.hours >= CUSTOM_EVO_NIGHT_START && gLocalTime.hours < CUSTOM_EVO_MIDNIGHT_PM && gEvolutionTable[species][i].param <= level && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+                #endif // CUSTOM_EVO_TIMES
+                #else
+                #endif // ITEM_STRANGE_SOUVENIR
+            case EVO_LEVEL_LOCATION:
+                {
+                    u16 requiredMapsec = gEvolutionTable[species][i].param;
+                    if (GetCurrentRegionMapSectionId() == requiredMapsec)
+                        targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                }
+                break;
             }
         }
         break;
@@ -5591,13 +5806,34 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
         break;
     case EVO_MODE_ITEM_USE:
     case EVO_MODE_ITEM_CHECK:
+
         for (i = 0; i < EVOS_PER_MON; i++)
         {
-            if (gEvolutionTable[species][i].method == EVO_ITEM
-             && gEvolutionTable[species][i].param == evolutionItem)
+            switch (gEvolutionTable[species][i].method)
             {
-                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            case EVO_ITEM:
+                if (gEvolutionTable[species][i].param == evolutionItem)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_ITEM_MALE:
+                if (GetMonGender(mon) == MON_FEMALE && gEvolutionTable[species][i].param == evolutionItem)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_ITEM_FEMALE:
+                if (GetMonGender(mon) == MON_MALE && gEvolutionTable[species][i].param == evolutionItem)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_STONE_HOLD_ITEM:
+                if (gEvolutionTable[species][i].param == evolutionItem && heldItem == DEFINE_STONE_HOLD_ITEM)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_ALOLA_STONE:
+			#ifdef ITEM_STRANGE_SOUVENIR
+                if (gEvolutionTable[species][i].param == evolutionItem && heldItem == ITEM_STRANGE_SOUVENIR)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+			#else
+			#endif
             }
         }
         break;
@@ -5605,6 +5841,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
 
     return targetSpecies;
 }
+//end of evolution methods
+
 
 u16 HoennPokedexNumToSpecies(u16 hoennNum)
 {

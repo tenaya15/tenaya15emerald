@@ -251,7 +251,34 @@
 #define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
 
-#define EVOS_PER_MON 5
+// new evo methods
+#define EVO_LEVEL_MALE           16 // reach specified level, is male
+#define EVO_LEVEL_FEMALE         17 // reach specified level, is female
+#define EVO_LEVEL_MALE_MORNING   18 // reach specified level, is male, is morning
+#define EVO_LEVEL_FEMALE_MORNING 19 // reach specified level, is female, is morning
+#define EVO_LEVEL_DAY            20 // reach specified level, is day
+#define EVO_LEVEL_NIGHT          21 // reach specified level, is night
+#define EVO_LEVEL_MORNING        22 // reach specified level, is morning
+#define EVO_LEVEL_DUSK           23 // reach specified level, is dusk
+#define EVO_HOLD_ITEM            24 // level up, hold specified item
+#define EVO_HOLD_ITEM_DAY        25 // level up, hold specified item at day
+#define EVO_HOLD_ITEM_NIGHT      26 // level up, hold specified item at night
+#define EVO_MOVE                 27 // level up, knows specific move
+#define EVO_MOVE_TYPE            28 // level up, knows move of specific type
+#define EVO_LEVEL_HOLD_ITEM      29 // reach specified level, hold specified item, DEFINE_LEVEL_HOLD_ITEM must be defined in src/pokemon.c
+#define EVO_MON_IN_PARTY         30 // level up, has specific mon in party
+#define EVO_ITEM_MALE            31 // use evo stone, is male
+#define EVO_ITEM_FEMALE          32 // use evo stone, is female
+#define EVO_STONE_HOLD_ITEM      33 // use evo stone, hold specified item, DEFINE_STONE_HOLD_ITEM must be defined in src/pokemon.c
+#define EVO_ALOLA_LEVEL          34 // reach specified level, hold ITEM_STRANGE_SOUVENIR
+#define EVO_ALOLA_LEVEL_NIGHT    35 // reach specified level, is night, hold ITEM_STRANGE_SOUVENIR
+#define EVO_ALOLA_STONE          36 // use evo stone, hold ITEM_STRANGE_SOUVENIR
+#define EVO_LEVEL_LOCATION       37 // Pokémon levels up in a specific location
+
+// end of new evo methods
+
+
+#define EVOS_PER_MON 8 // 8 allows Eevee to evolve to all Eeveelutions if Leafeon/Glaceon/Sylveon are added
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL     0

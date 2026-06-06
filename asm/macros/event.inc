@@ -1400,7 +1400,7 @@
 	@ The specified id can be used to refer to the sprite again later with turnvobject.
 	.macro createvobject graphicsId:req, id:req, x:req, y:req, elevation=3, direction=DIR_SOUTH
 	.byte SCR_OP_CREATEVOBJECT
-	.byte \graphicsId
+	.2byte \graphicsId
 	.byte \id
 	.2byte \x
 	.2byte \y
@@ -1782,6 +1782,11 @@
 	.2byte \quantity
 	.endm
 
+  @ Like callnative, but function expects a ctx
+  .macro callfunc func:req
+  .byte SCR_OP_CALLFUNC
+  .4byte \func
+  .endm
 
 @ Supplementary
 
@@ -1991,4 +1996,12 @@
 	setvar VAR_0x8005, \level
 	setvar VAR_0x8006, \item
 	special CreateEnemyEventMon
+	.endm
+
+		@ hide any follower pokemon if present,
+	@ putting them into their pokeball;
+	@ by default waits for their movement to finish
+	.macro hidefollower wait=1
+	callfunc ScrFunc_hidefollower
+	.2byte \wait
 	.endm

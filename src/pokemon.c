@@ -48,6 +48,8 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/region_map_sections.h"
+#include "field_weather.h"
+#include "constants/weather.h"
 
 #define DAY_EVO_HOUR_BEGIN       12
 #define DAY_EVO_HOUR_END         HOURS_PER_DAY
@@ -5781,6 +5783,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                     if (GetCurrentRegionMapSectionId() == requiredMapsec)
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 }
+                break;
+            case EVO_LEVEL_RAIN:
+                j = GetCurrentWeather();
+                if ((j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR) && gEvolutionTable[species][i].param <= level)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
         }

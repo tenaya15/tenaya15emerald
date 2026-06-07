@@ -274,6 +274,7 @@
 #define EVO_ALOLA_LEVEL_NIGHT    35 // reach specified level, is night, hold ITEM_STRANGE_SOUVENIR
 #define EVO_ALOLA_STONE          36 // use evo stone, hold ITEM_STRANGE_SOUVENIR
 #define EVO_LEVEL_LOCATION       37 // Pokémon levels up in a specific location
+#define EVO_LEVEL_RAIN           38 // level up in the rain
 
 // end of new evo methods
 

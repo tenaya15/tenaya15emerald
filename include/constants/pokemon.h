@@ -275,6 +275,8 @@
 #define EVO_ALOLA_STONE          36 // use evo stone, hold ITEM_STRANGE_SOUVENIR
 #define EVO_LEVEL_LOCATION       37 // Pokémon levels up in a specific location
 #define EVO_LEVEL_RAIN           38 // level up in the rain
+#define EVO_LEVEL_NATURE_AMPED   39 // reach specific level with nature
+#define EVO_LEVEL_NATURE_LOW_KEY 40 // reach specific level with nature
 
 // end of new evo methods
 

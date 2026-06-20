@@ -1014,3 +1014,124 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my LAB.$"
 
+
+// partner battle start
+PartnerBattle_EventScript_PartnerBattle_Start::
+	lockall
+	goto_if_set FLAG_INTERACTED_WITH_LEAF_BEFORE_BATTLE, PartnerBattle_EventScript_ReadyForBattle_AskAgain
+	setflag FLAG_INTERACTED_WITH_LEAF_BEFORE_BATTLE
+	msgbox PartnerBattle_Text_LeafAsksBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PartnerBattle_EventScript_ChoosePartyForMultiBattle
+	msgbox PartnerBattle_Text_AnsweredNoToBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+
+PartnerBattle_Text_LeafAsksBattle:
+	.string "There's some bad people around.\n"
+	.string "Can you help me get rid of them?$"
+
+PartnerBattle_EventScript_ReadyForBattle_AskAgain::
+	lockall
+	faceplayer
+	msgbox PartnerBattle_Text_ReadyForBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PartnerBattle_EventScript_ChoosePartyForMultiBattle
+	msgbox PartnerBattle_Text_AnsweredNoToBattle, MSGBOX_DEFAULT
+	closemessage
+	releaseall
+	end
+
+PartnerBattle_Text_ReadyForBattle:
+	.string "So will you help me?$"
+
+PartnerBattle_Text_AnsweredNoToBattle:
+	.string "You can't help me?\p"
+	.string "Or won't?$"
+
+// remove the comments from "waitstate" below if you use an older version
+PartnerBattle_EventScript_ChoosePartyForMultiBattle::
+	special SavePlayerParty
+	fadescreen FADE_TO_BLACK
+	special ChooseHalfPartyForBattle
+//	waitstate
+//if yes
+	goto_if_eq VAR_RESULT, YES, PartnerBattle_EventScript_DoLeafMultiBattle
+//if no
+	special LoadPlayerParty
+	msgbox PartnerBattle_Text_AnsweredNoToBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+
+// remove the comments from "waitstate" below if you use an older version
+PartnerBattle_EventScript_DoLeafMultiBattle::
+	special ReducePlayerPartyToSelectedMons
+	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
+	setvar VAR_0x8004, SPECIAL_BATTLE_LEAF
+	setvar VAR_0x8005, 0
+	special DoSpecialTrainerBattle
+//	waitstate
+	frontier_saveparty
+	special LoadPlayerParty
+	switch VAR_RESULT
+	case 1, PartnerBattle_EventScript_DefeatedEnemyTrainers
+//if lose	
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+//	waitstate
+	releaseall
+	end
+
+// remove the comments from "removeobject" below before compiling
+PartnerBattle_EventScript_DefeatedEnemyTrainers::
+	msgbox PartnerBattle_Text_EnemyTrainer1Defeated, MSGBOX_DEFAULT
+	closemessage
+	delay 20
+	msgbox PartnerBattle_Text_EnemyTrainer2Defeated, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+//	removeobject LOCALID_ENEMYTRAINER1
+//	removeobject LOCALID_ENEMYTRAINER2
+	setflag FLAG_PARTNER_HIDE_ENEMY_TRAINERS
+	fadescreen FADE_FROM_BLACK
+	msgbox PartnerBattle_Text_PartnerHealMon, MSGBOX_DEFAULT
+	special HealPlayerParty
+	closemessage
+	msgbox PartnerBattle_Text_PartnerThankYou, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+//	removeobject LOCALID_BATTLEPARTNER_LEAF
+	setflag FLAG_LEAF_PARTNER_BATTLE
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+PartnerBattle_Text_EnemyTrainer1Defeated:
+	.string "I can't believe we lost.$"
+PartnerBattle_Text_EnemyTrainer2Defeated:
+	.string "This is the last time I work with you.$"
+PartnerBattle_Text_PartnerHealMon:
+	.string "{PLAYER}, let me heal your POKéMON.$"
+PartnerBattle_Text_PartnerThankYou:
+	.string "Thank you for helping me.\p"
+	.string "I hope to meet you again somewhere.$"
+
+
+//battle information
+PartnerBattle_EventScript_EnemyTrainer1::
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_BRENDAN_PLACEHOLDER, LOCALID_NONE, PartnerBattle_Text_EnemyTrainer1Defeat, PartnerBattle_Text_EnemyTrainer1DefeatAfter
+	end
+
+PartnerBattle_EventScript_EnemyTrainer2::
+	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_MAY_PLACEHOLDER, LOCALID_NONE, PartnerBattle_Text_EnemyTrainer2Defeat, PartnerBattle_Text_EnemyTrainer2DefeatAfter
+	end
+
+PartnerBattle_Text_EnemyTrainer1Defeat:
+	.string "I'm done.$"
+
+PartnerBattle_Text_EnemyTrainer2Defeat:
+	.string "I'm beat.$"
+
+PartnerBattle_Text_EnemyTrainer1DefeatAfter:
+	.string "I'm done.$"
+
+PartnerBattle_Text_EnemyTrainer2DefeatAfter:
+	.string "I'm beat.$"
+//end

@@ -106,7 +106,15 @@ void HandleIntroSlide(u8 environment)
 {
     u8 taskId;
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
+    if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
+    {
+        taskId = CreateTask(sBattleIntroSlideFuncs[environment], 0);
+    }
+    else if (gPartnerTrainerId == TRAINER_LEAF_PARTNER)
+    {
+        taskId = CreateTask(sBattleIntroSlideFuncs[environment], 0);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         taskId = CreateTask(BattleIntroSlidePartner, 0);
     }

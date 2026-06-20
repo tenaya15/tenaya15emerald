@@ -1304,6 +1304,12 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
         xPos = 90;
         yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
+	else if (gPartnerTrainerId == TRAINER_LEAF_PARTNER)
+    {
+        trainerPicId = TRAINER_BACK_PIC_LEAF;
+        xPos = 90;
+        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
+    }
     else
     {
         trainerPicId = GetFrontierTrainerFrontSpriteId(gPartnerTrainerId);
@@ -1313,6 +1319,17 @@ static void PlayerPartnerHandleDrawTrainerPic(void)
 
     // Use back pic only if the partner is Steven
     if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
+    {
+        DecompressTrainerBackPic(trainerPicId, gActiveBattler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
+        gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
+
+        gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].x2 = DISPLAY_WIDTH;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].sSpeedX = -2;
+        gSprites[gBattlerSpriteIds[gActiveBattler]].callback = SpriteCB_TrainerSlideIn;
+    }
+	else if (gPartnerTrainerId == TRAINER_LEAF_PARTNER)
     {
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
         SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
@@ -1794,6 +1811,11 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(void)
     if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
     {
         u8 spriteId = TRAINER_BACK_PIC_STEVEN;
+        LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+    }
+	else if (gPartnerTrainerId == TRAINER_LEAF_PARTNER)
+    {
+        u8 spriteId = TRAINER_BACK_PIC_LEAF;
         LoadCompressedPalette(gTrainerBackPicPaletteTable[spriteId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
     }
     else

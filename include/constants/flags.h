@@ -88,9 +88,9 @@
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_INTERACTED_WITH_LEAF_BEFORE_BATTLE   0x4D // Unused Flag
+#define FLAG_PARTNER_HIDE_ENEMY_TRAINERS          0x4E // Unused Flag
+#define FLAG_LEAF_PARTNER_BATTLE                  0x4F // Unused Flag
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50

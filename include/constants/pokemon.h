@@ -277,6 +277,7 @@
 #define EVO_LEVEL_RAIN           38 // level up in the rain
 #define EVO_LEVEL_NATURE_AMPED   39 // reach specific level with nature
 #define EVO_LEVEL_NATURE_LOW_KEY 40 // reach specific level with nature
+#define EVO_BY_ITEM_COUNT        41 // level up and have number of specific items in bag, items then removed, DEFINE_ITEM_COUNT_FOR_EVO must be defined in src/pokemon.c
 
 // end of new evo methods
 

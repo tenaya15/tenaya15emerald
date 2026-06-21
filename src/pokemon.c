@@ -78,9 +78,11 @@
 // uncomment to use the above times as new evolution times, else default times will be used
 //#define CUSTOM_EVO_TIMES
 
-// required for `EVO_LEVEL_HOLD_ITEM` and `EVO_STONE_HOLD_ITEM`
+// required for `EVO_LEVEL_HOLD_ITEM` / `EVO_STONE_HOLD_ITEM` / `EVO_BY_ITEM_COUNT`
 #define DEFINE_LEVEL_HOLD_ITEM      ITEM_POTION
 #define DEFINE_STONE_HOLD_ITEM      ITEM_SUPER_POTION
+#define DEFINE_ITEM_COUNT_FOR_EVO   100
+
 
 
 struct SpeciesItem
@@ -5834,6 +5836,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                         targetSpecies = gEvolutionTable[species][i].targetSpecies;
                         break;
                     }
+                }
+                break;
+            case EVO_BY_ITEM_COUNT:
+                if (CheckBagHasItem(gEvolutionTable[species][i].param, DEFINE_ITEM_COUNT_FOR_EVO))
+                {
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                    RemoveBagItem(gEvolutionTable[species][i].param, DEFINE_ITEM_COUNT_FOR_EVO);
                 }
                 break;
             }

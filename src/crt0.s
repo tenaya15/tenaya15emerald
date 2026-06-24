@@ -2,6 +2,9 @@
 
 	.syntax unified
 
+	.4byte gEgg1PaletteTable
+	.4byte gEgg2PaletteTable
+
 	.arm
 
 	.align 2, 0

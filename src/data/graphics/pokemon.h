@@ -2822,3 +2822,43 @@ const u8 gMonIcon_UnownExclamationMark[] = INCGFX_U8("graphics/pokemon/unown/exc
 const u32 gMonStillFrontPic_UnownQuestionMark[] = INCGFX_U32("graphics/pokemon/unown/question_mark/front.png", ".4bpp.lz");
 const u32 gMonBackPic_UnownQuestionMark[] = INCGFX_U32("graphics/pokemon/unown/question_mark/back.png", ".4bpp.lz");
 const u8 gMonIcon_UnownQuestionMark[] = INCGFX_U8("graphics/pokemon/unown/question_mark/icon.png", ".4bpp");
+
+const u32 gMonPalette_Egg_Normal1[] = INCGFX_U32("graphics/pokemon/egg/types/normal1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Normal2[] = INCGFX_U32("graphics/pokemon/egg/types/normal2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Fighting1[] = INCGFX_U32("graphics/pokemon/egg/types/fighting1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Fighting2[] = INCGFX_U32("graphics/pokemon/egg/types/fighting2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Flying1[] = INCGFX_U32("graphics/pokemon/egg/types/flying1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Flying2[] = INCGFX_U32("graphics/pokemon/egg/types/flying2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Poison1[] = INCGFX_U32("graphics/pokemon/egg/types/poison1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Poison2[] = INCGFX_U32("graphics/pokemon/egg/types/poison2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ground1[] = INCGFX_U32("graphics/pokemon/egg/types/ground1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ground2[] = INCGFX_U32("graphics/pokemon/egg/types/ground2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Rock1[] = INCGFX_U32("graphics/pokemon/egg/types/rock1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Rock2[] = INCGFX_U32("graphics/pokemon/egg/types/rock2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Bug1[] = INCGFX_U32("graphics/pokemon/egg/types/bug1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Bug2[] = INCGFX_U32("graphics/pokemon/egg/types/bug2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ghost1[] = INCGFX_U32("graphics/pokemon/egg/types/ghost1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ghost2[] = INCGFX_U32("graphics/pokemon/egg/types/ghost2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Steel1[] = INCGFX_U32("graphics/pokemon/egg/types/steel1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Steel2[] = INCGFX_U32("graphics/pokemon/egg/types/steel2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Fire1[] = INCGFX_U32("graphics/pokemon/egg/types/fire1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Fire2[] = INCGFX_U32("graphics/pokemon/egg/types/fire2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Water1[] = INCGFX_U32("graphics/pokemon/egg/types/water1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Water2[] = INCGFX_U32("graphics/pokemon/egg/types/water2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Grass1[] = INCGFX_U32("graphics/pokemon/egg/types/grass1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Grass2[] = INCGFX_U32("graphics/pokemon/egg/types/grass2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Electric1[] = INCGFX_U32("graphics/pokemon/egg/types/electric1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Electric2[] = INCGFX_U32("graphics/pokemon/egg/types/electric2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Psychic1[] = INCGFX_U32("graphics/pokemon/egg/types/psychic1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Psychic2[] = INCGFX_U32("graphics/pokemon/egg/types/psychic2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ice1[] = INCGFX_U32("graphics/pokemon/egg/types/ice1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Ice2[] = INCGFX_U32("graphics/pokemon/egg/types/ice2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Dragon1[] = INCGFX_U32("graphics/pokemon/egg/types/dragon1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Dragon2[] = INCGFX_U32("graphics/pokemon/egg/types/dragon2.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Dark1[] = INCGFX_U32("graphics/pokemon/egg/types/dark1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Dark2[] = INCGFX_U32("graphics/pokemon/egg/types/dark2.pal", ".gbapal.lz");
+
+#ifdef TYPE_FAIRY
+const u32 gMonPalette_Egg_Fairy1[] = INCGFX_U32("graphics/pokemon/egg/types/fairy1.pal", ".gbapal.lz");
+const u32 gMonPalette_Egg_Fairy2[] = INCGFX_U32("graphics/pokemon/egg/types/fairy2.pal", ".gbapal.lz");
+#endif

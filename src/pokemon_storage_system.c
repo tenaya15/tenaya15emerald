@@ -6895,8 +6895,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-            sStorage->filler2[0] = gBaseStats[GetMonData(mon, MON_DATA_SPECIES)].type1;
-            sStorage->filler2[1] = gBaseStats[GetMonData(mon, MON_DATA_SPECIES)].type2;
+            sStorage->filler2[0] = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0];
+            sStorage->filler2[1] = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1];
         }
     }
     else if (mode == MODE_BOX)
@@ -6921,8 +6921,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, otId, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
-            sStorage->filler2[0] = gBaseStats[GetBoxMonData(boxMon, MON_DATA_SPECIES)].type1;
-            sStorage->filler2[1] = gBaseStats[GetBoxMonData(boxMon, MON_DATA_SPECIES)].type2;
+            sStorage->filler2[0] = gSpeciesInfo[GetBoxMonData(boxMon, MON_DATA_SPECIES)].types[0];
+            sStorage->filler2[1] = gSpeciesInfo[GetBoxMonData(boxMon, MON_DATA_SPECIES)].types[1];
         }
     }
     else

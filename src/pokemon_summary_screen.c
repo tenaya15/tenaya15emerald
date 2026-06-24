@@ -3817,6 +3817,8 @@ static void SetTypeSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 static void SetMonTypeIcons(void)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
+        SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[0], 120, 48, SPRITE_ARR_ID_TYPE);
+        if (gSpeciesInfo[summary->species].types[0] != gSpeciesInfo[summary->species].types[1])
         {
             SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[1], 160, 48, SPRITE_ARR_ID_TYPE + 1);
             SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, FALSE);
@@ -3949,11 +3951,11 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         }
         else
         {
-            pal1 = &gEgg1PaletteTable[gBaseStats[summary->species].type1];
-            pal2 = &gEgg2PaletteTable[gBaseStats[summary->species].type2];
+            pal1 = &gEgg1PaletteTable[gSpeciesInfo[summary->species].types[0]];
+            pal2 = &gEgg2PaletteTable[gSpeciesInfo[summary->species].types[1]];
             LoadCompressedEggSpritePalette(pal1, pal2);
         }
-        SetMultiuseSpriteTemplateToPokemon(pal->tag, B_POSITION_OPPONENT_LEFT);
+        SetMultiuseSpriteTemplateToPokemon(pal1->tag, B_POSITION_OPPONENT_LEFT);
         (*state)++;
         return 0xFF;
     }

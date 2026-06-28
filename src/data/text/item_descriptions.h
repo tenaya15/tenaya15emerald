@@ -1549,3 +1549,8 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+static const u8 sInfinityCandyDesc[] = _(
+    "Reusable. Raises a\n"
+    "Pokémon's level\n"
+    "by one.");

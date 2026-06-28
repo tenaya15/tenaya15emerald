@@ -382,6 +382,14 @@ const u8 gItemEffect_TamatoBerry[10] = {
     EV_BERRY_FRIENDSHIP_CHANGE,
 };
 
+const u8 gItemEffect_InfinityCandy[10] = {
+    [3] = ITEM3_LEVEL_UP,
+    [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
+    [5] = ITEM5_FRIENDSHIP_ALL,
+    [6] = ITEM6_HEAL_HP_LVL_UP,
+    VITAMIN_FRIENDSHIP_CHANGE(7),
+};
+
 const u8 *const gItemEffectTable[] =
 {
     [ITEM_POTION - ITEM_POTION]        = gItemEffect_Potion,
@@ -453,5 +461,6 @@ const u8 *const gItemEffectTable[] =
     [ITEM_HONDEW_BERRY - ITEM_POTION]  = gItemEffect_HondewBerry,
     [ITEM_GREPA_BERRY - ITEM_POTION]   = gItemEffect_GrepaBerry,
     [ITEM_TAMATO_BERRY - ITEM_POTION]  = gItemEffect_TamatoBerry,
+	[ITEM_INFINITY_CANDY - ITEM_POTION] = gItemEffect_InfinityCandy,
     [LAST_BERRY_INDEX - ITEM_POTION]   = NULL
 };

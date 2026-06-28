@@ -114,7 +114,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_063] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_064] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_065] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-    [ITEM_066] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+	[ITEM_INFINITY_CANDY] = {gItemIcon_RareCandy, gItemIconPalette_GoldTeeth},
     // Valuables
     [ITEM_TINY_MUSHROOM] = {gItemIcon_TinyMushroom, gItemIconPalette_Mushroom},
     [ITEM_BIG_MUSHROOM] = {gItemIcon_BigMushroom, gItemIconPalette_Mushroom},

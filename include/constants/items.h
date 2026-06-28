@@ -113,7 +113,7 @@
 #define ITEM_063 99
 #define ITEM_064 100
 #define ITEM_065 101
-#define ITEM_066 102
+#define ITEM_INFINITY_CANDY 102
 
 // Unusable
 #define ITEM_TINY_MUSHROOM 103

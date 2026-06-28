@@ -1258,15 +1258,16 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_066] =
+    [ITEM_INFINITY_CANDY] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("INFINITYCANDY"),
+		.itemId = ITEM_INFINITY_CANDY,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .description = sInfinityCandyDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_InfinityCandy,
     },
 
 // Valuable items

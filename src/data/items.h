@@ -1247,15 +1247,16 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_065] =
+    [ITEM_INFINITE_RARE_CANDIES] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("RARECANDY BOX"),
+        .itemId = ITEM_INFINITE_RARE_CANDIES,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .description = sInfiniteRareCandy,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_InfiniteRareCandies,
     },
 
     [ITEM_066] =

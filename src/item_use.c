@@ -1125,4 +1125,19 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
 }
 
+void ItemUseOutOfBattle_InfiniteRareCandies(u8 taskId)
+{
+    PlaySE(MUS_OBTAIN_ITEM);
+    AddBagItem(ITEM_RARE_CANDY, 999);
+    if (gTasks[taskId].tUsingRegisteredKeyItem) // to account for pressing select in the overworld
+    {
+        DisplayItemMessageOnField(taskId, gText_infiniteCandies, Task_CloseCantUseKeyItemMessage);
+    }
+    else
+    {
+        DisplayItemMessage(taskId, 1, gText_infiniteCandies, CloseItemMessage);
+        UpdatePocketItemList(ITEMS_POCKET);
+    }
+}
+
 #undef tUsingRegisteredKeyItem

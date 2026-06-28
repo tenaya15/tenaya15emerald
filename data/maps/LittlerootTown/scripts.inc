@@ -388,7 +388,6 @@ LittlerootTown_EventScript_GoSaveBirchTrigger::
 	end
 
 LittlerootTown_EventScript_TownSign::
-	additem ITEM_INFINITE_RARE_CANDIES
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
 

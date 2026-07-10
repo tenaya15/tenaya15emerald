@@ -1014,3 +1014,105 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my LAB.$"
 
+
+//Sliding Puzzles Start
+
+SlidingPuzzle_EventScript_Kabuto_Start::
+	goto_if_set FLAG_SLIDING_PUZZLE_KABUTO_SOLVED, SlidingPuzzle_EventScript_Kabuto_Solved
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_KABUTO
+	setvar VAR_0x8005, FALSE
+	special DoSlidingPuzzle
+	waitstate
+	goto_if_eq VAR_RESULT, TRUE, SlidingPuzzle_EventScript_Kabuto_SetFlag
+	release
+	end
+
+SlidingPuzzle_EventScript_Kabuto_SetFlag:
+	setflag FLAG_SLIDING_PUZZLE_KABUTO_SOLVED
+	release
+	end
+
+SlidingPuzzle_EventScript_Kabuto_Solved:
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_KABUTO
+	setvar VAR_0x8005, TRUE
+	special DoSlidingPuzzle
+	waitstate
+	release
+	end
+
+SlidingPuzzle_EventScript_Omanyte_Start::
+	goto_if_set FLAG_SLIDING_PUZZLE_OMANYTE_SOLVED, SlidingPuzzle_EventScript_Omanyte_Solved
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_OMANYTE
+	setvar VAR_0x8005, FALSE
+	special DoSlidingPuzzle
+	waitstate
+	goto_if_eq VAR_RESULT, TRUE, SlidingPuzzle_EventScript_Omanyte_SetFlag
+	release
+	end
+
+SlidingPuzzle_EventScript_Omanyte_SetFlag:
+	setflag FLAG_SLIDING_PUZZLE_OMANYTE_SOLVED
+	release
+	end
+
+SlidingPuzzle_EventScript_Omanyte_Solved:
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_OMANYTE
+	setvar VAR_0x8005, TRUE
+	special DoSlidingPuzzle
+	waitstate
+	release
+	end
+
+SlidingPuzzle_EventScript_Aerodactyl_Start::
+	goto_if_set FLAG_SLIDING_PUZZLE_AERODACTYL_SOLVED, SlidingPuzzle_EventScript_Aerodactyl_Solved
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_AERODACTYL
+	setvar VAR_0x8005, FALSE
+	special DoSlidingPuzzle
+	waitstate
+	goto_if_eq VAR_RESULT, TRUE, SlidingPuzzle_EventScript_Aerodactyl_SetFlag
+	release
+	end
+
+SlidingPuzzle_EventScript_Aerodactyl_SetFlag:
+	setflag FLAG_SLIDING_PUZZLE_AERODACTYL_SOLVED
+	release
+	end
+
+SlidingPuzzle_EventScript_Aerodactyl_Solved:
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_AERODACTYL
+	setvar VAR_0x8005, TRUE
+	special DoSlidingPuzzle
+	waitstate
+	release
+	end
+
+SlidingPuzzle_EventScript_Ho_oh_Start::
+	goto_if_set FLAG_SLIDING_PUZZLE_HO_OH_SOLVED, SlidingPuzzle_EventScript_Ho_oh_Solved
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_HO_OH
+	setvar VAR_0x8005, FALSE
+	special DoSlidingPuzzle
+	waitstate
+	goto_if_eq VAR_RESULT, TRUE, SlidingPuzzle_EventScript_Ho_oh_SetFlag
+	release
+	end
+
+SlidingPuzzle_EventScript_Ho_oh_SetFlag:
+	setflag FLAG_SLIDING_PUZZLE_HO_OH_SOLVED
+	release
+	end
+
+SlidingPuzzle_EventScript_Ho_oh_Solved:
+	fadescreen FADE_TO_BLACK
+	setvar VAR_0x8004, SLIDING_PUZZLE_HO_OH
+	setvar VAR_0x8005, TRUE
+	special DoSlidingPuzzle
+	waitstate
+	release
+	end

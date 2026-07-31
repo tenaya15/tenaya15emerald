@@ -1186,3 +1186,42 @@ static void BlendAnimPalette_BattleDome_FloorLightsNoBlend(u16 timer)
             sSecondaryTilesetAnimCallback = NULL;
     }
 }
+
+static void TilesetAnim_Mauville_Game_Corner(u16);
+
+static void QueueAnimTiles_Mauville_Game_Corner_Lights(u16);
+
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame0[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_0.4bpp");
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame1[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_1.4bpp");
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame2[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_2.4bpp");
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame3[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_3.4bpp");
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame4[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_4.4bpp");
+const u16 gTilesetAnims_MauvilleGameCorner_Lights_Frame5[] = INCBIN_U16("data/tilesets/secondary/mauville_game_corner/anim/lights/light_anim_5.4bpp");
+
+const u16 *const gTilesetAnims_Mauville_Game_Corner_Lights[] = {
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame0,
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame1,
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame2,
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame3,
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame4,
+    gTilesetAnims_MauvilleGameCorner_Lights_Frame5
+};
+
+static void QueueAnimTiles_Mauville_Game_Corner_Lights(u16 timer)
+{
+    u16 i = timer % 6; 
+    AppendTilesetAnimToBuffer(gTilesetAnims_Mauville_Game_Corner_Lights[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(521)), 0x40);
+}
+
+void InitTilesetAnim_MauvilleGameCorner(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 128;
+    sSecondaryTilesetAnimCallback = TilesetAnim_Mauville_Game_Corner;
+}
+
+static void TilesetAnim_Mauville_Game_Corner(u16 timer)
+{
+    if (timer % 16 == 0)
+        QueueAnimTiles_Mauville_Game_Corner_Lights(timer / 16);
+}

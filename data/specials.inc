@@ -540,3 +540,7 @@ gSpecials::
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
+	def_special CheckLeagueWonWithChallenge1MonsOnly
+	def_special GiveLeagueChallenge1Reward
+	def_special CountPlayerLivingDex1Species
+	def_special GiveLivingDex1Reward

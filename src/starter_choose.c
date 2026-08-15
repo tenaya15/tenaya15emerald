@@ -112,9 +112,9 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
 
 static const u16 sStarterMon[STARTER_MON_COUNT] =
 {
-    SPECIES_TREECKO,
-    SPECIES_TORCHIC,
-    SPECIES_MUDKIP,
+    SPECIES_EEVEE,
+    SPECIES_EEVEE,
+    SPECIES_EEVEE,
 };
 
 static const struct BgTemplate sBgTemplates[3] =
@@ -446,18 +446,9 @@ void CB2_ChooseStarter(void)
     spriteId = CreateSprite(&sSpriteTemplate_Hand, 120, 56, 2);
     gSprites[spriteId].data[0] = taskId;
 
-    // Create three Poké Ball sprites
-    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[0][0], sPokeballCoords[0][1], 2);
-    gSprites[spriteId].sTaskId = taskId;
-    gSprites[spriteId].sBallId = 0;
-
     spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[1][0], sPokeballCoords[1][1], 2);
     gSprites[spriteId].sTaskId = taskId;
     gSprites[spriteId].sBallId = 1;
-
-    spriteId = CreateSprite(&sSpriteTemplate_Pokeball, sPokeballCoords[2][0], sPokeballCoords[2][1], 2);
-    gSprites[spriteId].sTaskId = taskId;
-    gSprites[spriteId].sBallId = 2;
 
     sStarterLabelWindowId = WINDOW_NONE;
 }
@@ -494,25 +485,21 @@ static void Task_HandleStarterChooseInput(u8 taskId)
         // Create white circle background
         spriteId = CreateSprite(&sSpriteTemplate_StarterCircle, sPokeballCoords[selection][0], sPokeballCoords[selection][1], 1);
         gTasks[taskId].tCircleSpriteId = spriteId;
-
+		
         // Create Pokémon sprite
+        // only one Poké Ball is shown, so left/right movement is
+        // disabled - the cursor stays on the lone ball.
         spriteId = CreatePokemonFrontSprite(GetStarterPokemon(gTasks[taskId].tStarterSelection), sPokeballCoords[selection][0], sPokeballCoords[selection][1]);
-        gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;
+        gSprites[spriteId].x2 = 4;
+        gSprites[spriteId].y2 = 2;
+        gSprites[spriteId].affineAnims = &sAffineAnims_StarterPokemon;;
         gSprites[spriteId].callback = SpriteCB_StarterPokemon;
 
         gTasks[taskId].tPkmnSpriteId = spriteId;
         gTasks[taskId].func = Task_WaitForStarterSprite;
     }
-    else if (JOY_NEW(DPAD_LEFT) && selection > 0)
-    {
-        gTasks[taskId].tStarterSelection--;
-        gTasks[taskId].func = Task_MoveStarterChooseCursor;
-    }
-    else if (JOY_NEW(DPAD_RIGHT) && selection < STARTER_MON_COUNT - 1)
-    {
-        gTasks[taskId].tStarterSelection++;
-        gTasks[taskId].func = Task_MoveStarterChooseCursor;
-    }
+    // only one Poké Ball is shown, so left/right movement is
+    // disabled - the cursor stays on the lone ball.
 }
 
 static void Task_WaitForStarterSprite(u8 taskId)

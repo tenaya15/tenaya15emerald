@@ -132,6 +132,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
+	goto RandomStarter_EventScript_SetRival
 	releaseall
 	end
 
@@ -992,3 +993,43 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+RandomStarter_EventScript_SetRival::
+	setvar 0x8005, SPECIES_TREECKO
+	special CheckSpecies
+	goto_if_eq VAR_RESULT, TRUE, RandomStarter_EventScript_SetVar_Grass
+
+	setvar 0x8005, SPECIES_TORCHIC
+	special CheckSpecies
+	goto_if_eq VAR_RESULT, TRUE, RandomStarter_EventScript_SetVar_Fire
+
+	setvar 0x8005, SPECIES_MUDKIP
+	special CheckSpecies
+	goto_if_eq VAR_RESULT, TRUE, RandomStarter_EventScript_SetVar_Water
+
+//if none of these
+	goto RandomStarter_EventScript_RivalRandom
+//  releaseall
+//	end
+
+RandomStarter_EventScript_RivalRandom::
+    random 3
+    switch VAR_RESULT
+    case 0, RandomStarter_EventScript_SetVar_Grass
+    case 1, RandomStarter_EventScript_SetVar_Fire
+    case 2, RandomStarter_EventScript_SetVar_Water
+
+RandomStarter_EventScript_SetVar_Grass::
+	setvar VAR_STARTER_MON, 0
+	releaseall
+	end
+
+RandomStarter_EventScript_SetVar_Fire::
+	setvar VAR_STARTER_MON, 1
+	releaseall
+	end
+
+RandomStarter_EventScript_SetVar_Water::
+	setvar VAR_STARTER_MON, 2
+	releaseall
+	end

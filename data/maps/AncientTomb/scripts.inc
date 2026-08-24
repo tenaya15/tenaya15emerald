@@ -16,6 +16,7 @@ AncientTomb_EventScript_TryRemoveRegisteel::
 
 AncientTomb_OnTransition:
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
+	goto_if_set FLAG_CAUGHT_REGISTEEL, Common_EventScript_End
 	call_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_EventScript_ShowRegisteel
 	end
 
@@ -66,11 +67,18 @@ AncientTomb_EventScript_Registeel::
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
+	end
+
+AncientTomb_EventScript_CaughtRegisteel::
+	setflag FLAG_CAUGHT_REGISTEEL
+	setflag FLAG_DEFEATED_REGISTEEL
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::

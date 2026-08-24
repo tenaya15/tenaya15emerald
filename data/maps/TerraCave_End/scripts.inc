@@ -14,6 +14,7 @@ TerraCave_End_EventScript_TryRemoveGroudon::
 	return
 
 TerraCave_End_OnTransition:
+	goto_if_set FLAG_CAUGHT_GROUDON, Common_EventScript_End
 	call_if_unset FLAG_DEFEATED_GROUDON, TerraCave_End_EventScript_ShowGroudon
 	end
 
@@ -39,12 +40,20 @@ TerraCave_End_EventScript_Groudon::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	setvar VAR_TEMP_1, 0
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, TerraCave_End_EventScript_CaughtGroudon
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, TerraCave_End_EventScript_DefeatedGroudon
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, TerraCave_End_EventScript_RanFromGroudon
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, TerraCave_End_EventScript_RanFromGroudon
 	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
 	setflag FLAG_DEFEATED_GROUDON
 	releaseall
+	end
+
+TerraCave_End_EventScript_CaughtGroudon::
+	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
+	setflag FLAG_CAUGHT_GROUDON
+	setflag FLAG_DEFEATED_GROUDON
+	goto Common_EventScript_RemoveStaticPokemon
 	end
 
 TerraCave_End_EventScript_DefeatedGroudon::

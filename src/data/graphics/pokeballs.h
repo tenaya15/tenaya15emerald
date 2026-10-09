@@ -35,3 +35,7 @@ const u32 gBallGfx_Premier[] = INCGFX_U32("graphics/balls/premier.png", ".4bpp.l
 const u32 gBallPal_Premier[] = INCGFX_U32("graphics/balls/premier.png", ".gbapal.lz");
 
 const u32 gOpenPokeballGfx[] = INCGFX_U32("graphics/balls/open.png", ".4bpp.lz");
+
+// ITEM_SHINING_BALL
+const u32 gBallGfx_Shining[] = INCGFX_U32("graphics/balls/shining.png", ".4bpp.lz");
+const u32 gBallPal_Shining[] = INCGFX_U32("graphics/balls/shining.pal", ".gbapal.lz");

@@ -3635,6 +3635,47 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
     return substruct;
 }
 
+bool8 SetMonPersonalitySafely(struct Pokemon *mon, u32 personality)
+{
+    struct BoxPokemon *boxMon = &mon->box;
+    union PokemonSubstruct substructs[4];
+    u32 oldPersonality = boxMon->personality;
+    u8 i;
+
+    if (oldPersonality == personality)
+        return TRUE;
+
+    DecryptBoxMon(boxMon);
+
+    if (CalculateBoxMonChecksum(boxMon) != boxMon->checksum)
+    {
+        EncryptBoxMon(boxMon);
+        return FALSE;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(substructs); i++)
+    {
+        memcpy(&substructs[i],
+               GetSubstruct(boxMon, oldPersonality, i),
+               sizeof(union PokemonSubstruct));
+    }
+
+    boxMon->personality = personality;
+
+    for (i = 0; i < ARRAY_COUNT(substructs); i++)
+    {
+        memcpy(GetSubstruct(boxMon, personality, i),
+               &substructs[i],
+               sizeof(union PokemonSubstruct));
+    }
+
+    boxMon->checksum = CalculateBoxMonChecksum(boxMon);
+
+    EncryptBoxMon(boxMon);
+
+    return TRUE;
+}
+
 /* GameFreak called GetMonData with either 2 or 3 arguments, for type
  * safety we have a GetMonData macro (in include/pokemon.h) which
  * dispatches to either GetMonData2 or GetMonData3 based on the number

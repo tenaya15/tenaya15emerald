@@ -5070,4 +5070,10 @@ extern const u32 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+// ITEM_SHINING_BALL
+extern const u32 gBallGfx_Shining[];
+extern const u32 gBallPal_Shining[];
+extern const u32 gItemIcon_ShiningBall[];
+extern const u32 gItemIconPalette_ShiningBall[];
+
 #endif //GUARD_GRAPHICS_H

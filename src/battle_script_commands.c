@@ -9929,6 +9929,53 @@ static void Cmd_handleballthrow(void)
         u32 odds;
         u8 catchRate;
 
+        if (gLastUsedItem == ITEM_SHINING_BALL)
+        {
+            struct Pokemon *mon;
+            u32 otId;
+            u32 personality;
+
+            mon = &gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]];
+
+            otId = GetMonData(mon, MON_DATA_OT_ID);
+
+            do
+            {
+                personality = Random32();
+            } while (!IsShinyOtIdPersonality(otId, personality));
+
+            if (!SetMonPersonalitySafely(mon, personality))
+            {
+            gBattlescriptCurrInstr = BattleScript_BallThrow;
+            return;
+            }
+
+            CalculateMonStats(mon);
+
+            if (!IsMonShiny(mon))
+            {
+            gBattlescriptCurrInstr = BattleScript_BallThrow;
+            return;
+            }
+
+        SetMonData(mon, MON_DATA_POKEBALL, &gLastUsedItem);
+
+        BtlController_EmitBallThrowAnim(B_COMM_TO_CONTROLLER, BALL_3_SHAKES_SUCCESS);
+
+        MarkBattlerForControllerExec(gActiveBattler);
+
+        gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
+
+        if (CalculatePlayerPartyCount() == PARTY_SIZE)
+            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        else
+            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        gBattleSpritesDataPtr->healthBoxesData[gBattlerTarget].triedShinyMonAnim = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[gBattlerTarget].finishedShinyMonAnim = FALSE;
+
+        return;
+        }
+
         if (gLastUsedItem == ITEM_SAFARI_BALL)
             catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
         else

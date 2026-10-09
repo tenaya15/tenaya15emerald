@@ -49,6 +49,8 @@ extern const u8 *const gBattlescriptsForRunningByItem[];
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
 
+extern const u8 BattleScript_ShiningBallThrow[];
+
 static const u8 sPkblToEscapeFactor[][3] = {
     {
         [B_MSG_MON_CURIOUS]    = 0,
@@ -320,6 +322,10 @@ void HandleAction_UseItem(void)
     if (gLastUsedItem <= LAST_BALL) // is ball
     {
         gBattlescriptCurrInstr = gBattlescriptsForBallThrow[gLastUsedItem];
+    }
+    else if (gLastUsedItem == ITEM_SHINING_BALL)
+    {
+        gBattlescriptCurrInstr = BattleScript_ShiningBallThrow;
     }
     else if (gLastUsedItem == ITEM_POKE_DOLL || gLastUsedItem == ITEM_FLUFFY_TAIL)
     {

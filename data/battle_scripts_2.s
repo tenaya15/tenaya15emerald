@@ -26,6 +26,7 @@ gBattlescriptsForBallThrow::
 	.4byte BattleScript_BallThrow        @ ITEM_TIMER_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_LUXURY_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_PREMIER_BALL
+	.4byte BattleScript_ShinyBallThrow   @ ITEM_SHINING_BALL
 
 	.align 2
 gBattlescriptsForUsingItem::
@@ -200,3 +201,7 @@ BattleScript_ActionWallyThrow:
 	printstring STRINGID_YOUTHROWABALLNOWRIGHT
 	waitmessage B_WAIT_TIME_LONG
 	end2
+
+BattleScript_ShinyBallThrow::
+    printstring STRINGID_PLAYERUSEDITEM
+    handleballthrow

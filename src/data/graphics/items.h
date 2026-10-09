@@ -736,3 +736,7 @@ const u32 gItemIconPalette_MagmaEmblem[] = INCGFX_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_OldSeaMap[] = INCGFX_U32("graphics/items/icons/old_sea_map.png", ".4bpp.lz");
 const u32 gItemIconPalette_OldSeaMap[] = INCGFX_U32("graphics/items/icon_palettes/old_sea_map.pal", ".gbapal.lz");
+
+// ITEM_SHINING_BALL
+const u32 gItemIcon_ShiningBall[] = INCGFX_U32("graphics/items/icons/shining_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_ShiningBall[] = INCGFX_U32("graphics/items/icon_palettes/shining_ball.pal", ".gbapal.lz");

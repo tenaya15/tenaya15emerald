@@ -1675,11 +1675,13 @@
 	.macro moverotatingtileobjects puzzleNumber:req
 	.byte SCR_OP_MOVEROTATINGTILEOBJECTS
 	.2byte \puzzleNumber
+	waitmovement
 	.endm
 
 	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Updates the facing direction of all objects on the puzzle tiles
 	.macro turnrotatingtileobjects
 	.byte SCR_OP_TURNROTATINGTILEOBJECTS
+	waitmovement
 	.endm
 
 	@ For the rotating tile puzzles in Mossdeep Gym / Trick House Room 7. Allocates memory for the puzzle objects.
@@ -1998,10 +2000,16 @@
 	special CreateEnemyEventMon
 	.endm
 
-		@ hide any follower pokemon if present,
+	@ hide any follower pokemon if present,
 	@ putting them into their pokeball;
 	@ by default waits for their movement to finish
 	.macro hidefollower wait=1
 	callfunc ScrFunc_hidefollower
 	.2byte \wait
+	.endm
+
+	@ Applies a movement to an object and waits for it to finish.
+	.macro applywaitmovement localId:req, movements:req, map
+	applymovement \localId, \movements, \map
+	waitmovement
 	.endm

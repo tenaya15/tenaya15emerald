@@ -736,3 +736,15 @@ const u32 gItemIconPalette_MagmaEmblem[] = INCGFX_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_OldSeaMap[] = INCGFX_U32("graphics/items/icons/old_sea_map.png", ".4bpp.lz");
 const u32 gItemIconPalette_OldSeaMap[] = INCGFX_U32("graphics/items/icon_palettes/old_sea_map.pal", ".gbapal.lz");
+
+//sinnoh balls items
+const u32 gItemIcon_HealBall[] = INCGFX_U32("graphics/items/icons/heal_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_HealBall[] = INCGFX_U32("graphics/items/icon_palettes/heal_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_DuskBall[] = INCGFX_U32("graphics/items/icons/dusk_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_DuskBall[] = INCGFX_U32("graphics/items/icon_palettes/dusk_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_QuickBall[] = INCGFX_U32("graphics/items/icons/quick_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_QuickBall[] = INCGFX_U32("graphics/items/icon_palettes/quick_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_ParkBall[] = INCGFX_U32("graphics/items/icons/park_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_ParkBall[] = INCGFX_U32("graphics/items/icon_palettes/park_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_CherishBall[] = INCGFX_U32("graphics/items/icons/cherish_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_CherishBall[] = INCGFX_U32("graphics/items/icon_palettes/cherish_ball.pal", ".gbapal.lz");

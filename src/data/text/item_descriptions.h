@@ -1549,3 +1549,29 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+// sinnoh balls
+static const u8 sHealBallDesc[] = _(
+    "A remedial ball\n"
+    "that restores\n"
+    "caught Pokémon.");
+
+static const u8 sDuskBallDesc[] = _(
+    "A ball that works\n"
+    "better at night\n"
+    "or in dark places.");
+
+static const u8 sQuickBallDesc[] = _(
+    "A ball that works\n"
+    "better at the\n"
+    "start of a battle.");
+
+static const u8 sParkBallDesc[] = _(
+    "A special ball\n"
+    "used only in\n"
+    "the Pal Park.");
+
+static const u8 sCherishBallDesc[] = _(
+    "A rare ball crafted\n"
+    "to commemorate a\n"
+    "special occasion.");

@@ -5070,4 +5070,28 @@ extern const u32 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+//sinnoh balls
+extern const u32 gBallGfx_Heal[];
+extern const u32 gBallPal_Heal[];
+extern const u32 gBallGfx_Dusk[];
+extern const u32 gBallPal_Dusk[];
+extern const u32 gBallGfx_Quick[];
+extern const u32 gBallPal_Quick[];
+extern const u32 gBallGfx_Park[];
+extern const u32 gBallPal_Park[];
+extern const u32 gBallGfx_Cherish[];
+extern const u32 gBallPal_Cherish[];
+
+//sinnoh ball items
+extern const u32 gItemIcon_HealBall[];
+extern const u32 gItemIconPalette_HealBall[];
+extern const u32 gItemIcon_DuskBall[];
+extern const u32 gItemIconPalette_DuskBall[];
+extern const u32 gItemIcon_QuickBall[];
+extern const u32 gItemIconPalette_QuickBall[];
+extern const u32 gItemIcon_ParkBall[];
+extern const u32 gItemIconPalette_ParkBall[];
+extern const u32 gItemIcon_CherishBall[];
+extern const u32 gItemIconPalette_CherishBall[];
+
 #endif //GUARD_GRAPHICS_H

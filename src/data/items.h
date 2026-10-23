@@ -169,6 +169,85 @@ const struct Item gItems[] =
         .secondaryId = ITEM_PREMIER_BALL - FIRST_BALL,
     },
 
+    [ITEM_HEAL_BALL] =
+    {
+        .name = _("HEAL BALL"),
+        .itemId = ITEM_HEAL_BALL,
+        .price = 1000,
+        .description = sHealBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_HEAL_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_HEAL_BALL - FIRST_BALL,
+    },
+	
+    [ITEM_DUSK_BALL] =
+    {
+        .name = _("DUSK BALL"),
+        .itemId = ITEM_DUSK_BALL,
+        .price = 1000,
+        .description = sDuskBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_DUSK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_DUSK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_QUICK_BALL] =
+    {
+        .name = _("QUICK BALL"),
+        .itemId = ITEM_QUICK_BALL,
+        .price = 1000,
+        .description = sQuickBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_QUICK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_QUICK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_PARK_BALL] =
+    {
+        .name = _("PARK BALL"),
+        .itemId = ITEM_PARK_BALL,
+        .price = 1000,
+        .description = sParkBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_PARK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_PARK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_CHERISH_BALL] =
+    {
+        .name = _("CHERISH BALL"),
+        .itemId = ITEM_CHERISH_BALL,
+        .price = 10000,
+        .description = sCherishBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_PARTY_MENU,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_CHERISH_BALL - FIRST_BALL,
+    },
+
+/* Use if Cherish Ball is to be used as a Key Item instead and remove the above entry
+    [ITEM_CHERISH_BALL] =
+    {
+        .name = _("CHERISH BALL"),
+        .itemId = ITEM_CHERISH_BALL,
+        .price = 0,
+        .description = sCherishBallDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+*/
+
 // Medicine
 
     [ITEM_POTION] =

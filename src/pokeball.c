@@ -56,6 +56,11 @@ static u16 GetBattlerPokeballItemId(u8 battler);
 #define GFX_TAG_TIMER_BALL   55009
 #define GFX_TAG_LUXURY_BALL  55010
 #define GFX_TAG_PREMIER_BALL 55011
+#define GFX_TAG_HEAL_BALL    55012
+#define GFX_TAG_DUSK_BALL    55013
+#define GFX_TAG_QUICK_BALL   55014
+#define GFX_TAG_PARK_BALL    55015
+#define GFX_TAG_CHERISH_BALL 55016
 
 const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
 {
@@ -71,6 +76,11 @@ const struct CompressedSpriteSheet gBallSpriteSheets[POKEBALL_COUNT] =
     [BALL_TIMER]   = {gBallGfx_Timer,   384, GFX_TAG_TIMER_BALL},
     [BALL_LUXURY]  = {gBallGfx_Luxury,  384, GFX_TAG_LUXURY_BALL},
     [BALL_PREMIER] = {gBallGfx_Premier, 384, GFX_TAG_PREMIER_BALL},
+    [BALL_HEAL]    = {gBallGfx_Heal,    384, GFX_TAG_HEAL_BALL},
+    [BALL_DUSK]    = {gBallGfx_Dusk,    384, GFX_TAG_DUSK_BALL},
+    [BALL_QUICK]   = {gBallGfx_Quick,   384, GFX_TAG_QUICK_BALL},
+    [BALL_PARK]    = {gBallGfx_Park,    384, GFX_TAG_PARK_BALL},
+    [BALL_CHERISH] = {gBallGfx_Cherish, 384, GFX_TAG_CHERISH_BALL},
 };
 
 const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
@@ -87,6 +97,11 @@ const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
     [BALL_TIMER]   = {gBallPal_Timer,   GFX_TAG_TIMER_BALL},
     [BALL_LUXURY]  = {gBallPal_Luxury,  GFX_TAG_LUXURY_BALL},
     [BALL_PREMIER] = {gBallPal_Premier, GFX_TAG_PREMIER_BALL},
+    [BALL_HEAL]    = {gBallPal_Heal,    GFX_TAG_HEAL_BALL},
+    [BALL_DUSK]    = {gBallPal_Dusk,    GFX_TAG_DUSK_BALL},
+    [BALL_QUICK]   = {gBallPal_Quick,   GFX_TAG_QUICK_BALL},
+    [BALL_PARK]    = {gBallPal_Park,    GFX_TAG_PARK_BALL},
+    [BALL_CHERISH] = {gBallPal_Cherish, GFX_TAG_CHERISH_BALL},
 };
 
 static const struct OamData sBallOamData =
@@ -318,6 +333,56 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
     {
         .tileTag = GFX_TAG_PREMIER_BALL,
         .paletteTag = GFX_TAG_PREMIER_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_HEAL] =
+    {
+        .tileTag = GFX_TAG_HEAL_BALL,
+        .paletteTag = GFX_TAG_HEAL_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_DUSK] =
+    {
+        .tileTag = GFX_TAG_DUSK_BALL,
+        .paletteTag = GFX_TAG_DUSK_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_QUICK] =
+    {
+        .tileTag = GFX_TAG_QUICK_BALL,
+        .paletteTag = GFX_TAG_QUICK_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_PARK] =
+    {
+        .tileTag = GFX_TAG_PARK_BALL,
+        .paletteTag = GFX_TAG_PARK_BALL,
+        .oam = &sBallOamData,
+        .anims = sBallAnimSequences,
+        .images = NULL,
+        .affineAnims = sAffineAnim_BallRotate,
+        .callback = SpriteCB_BallThrow,
+    },
+    [BALL_CHERISH] =
+    {
+        .tileTag = GFX_TAG_CHERISH_BALL,
+        .paletteTag = GFX_TAG_CHERISH_BALL,
         .oam = &sBallOamData,
         .anims = sBallAnimSequences,
         .images = NULL,

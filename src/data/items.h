@@ -248,6 +248,32 @@ const struct Item gItems[] =
     },
 */
 
+    [ITEM_DREAM_BALL] =
+    {
+        .name = _("DREAM BALL"),
+        .itemId = ITEM_DREAM_BALL,
+        .price = 1000,
+        .description = sDreamBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_DREAM_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_DREAM_BALL - FIRST_BALL,
+    },
+
+    [ITEM_BEAST_BALL] =
+    {
+        .name = _("BEAST BALL"),
+        .itemId = ITEM_BEAST_BALL,
+        .price = 10000,
+        .description = sBeastBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_BEAST_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_BEAST_BALL - FIRST_BALL,
+    },
+
 // Medicine
 
     [ITEM_POTION] =

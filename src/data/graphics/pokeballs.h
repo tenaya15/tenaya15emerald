@@ -51,3 +51,9 @@ const u32 gBallPal_Park[] = INCGFX_U32("graphics/balls/park.png", ".gbapal.lz");
 
 const u32 gBallGfx_Cherish[] = INCGFX_U32("graphics/balls/cherish.png", ".4bpp.lz");
 const u32 gBallPal_Cherish[] = INCGFX_U32("graphics/balls/cherish.png", ".gbapal.lz");
+
+const u32 gBallGfx_Dream[] = INCGFX_U32("graphics/balls/dream.png", ".4bpp.lz");
+const u32 gBallPal_Dream[] = INCGFX_U32("graphics/balls/dream.png", ".gbapal.lz");
+
+const u32 gBallGfx_Beast[] = INCGFX_U32("graphics/balls/beast.png", ".4bpp.lz");
+const u32 gBallPal_Beast[] = INCGFX_U32("graphics/balls/beast.png", ".gbapal.lz");

@@ -20,6 +20,8 @@ enum
     BALL_QUICK,
     BALL_PARK,
     BALL_CHERISH,
+    BALL_DREAM,
+    BALL_BEAST,
     POKEBALL_COUNT
 };
 

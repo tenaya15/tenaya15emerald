@@ -19,6 +19,8 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 	[ITEM_QUICK_BALL] = {gItemIcon_QuickBall, gItemIconPalette_QuickBall},
 	[ITEM_PARK_BALL] = {gItemIcon_ParkBall, gItemIconPalette_ParkBall},
 	[ITEM_CHERISH_BALL] = {gItemIcon_CherishBall, gItemIconPalette_CherishBall},
+	[ITEM_DREAM_BALL] = {gItemIcon_DreamBall, gItemIconPalette_DreamBall},
+	[ITEM_BEAST_BALL] = {gItemIcon_BeastBall, gItemIconPalette_BeastBall},
     // Medicine
     [ITEM_POTION] = {gItemIcon_Potion, gItemIconPalette_Potion},
     [ITEM_ANTIDOTE] = {gItemIcon_Antidote, gItemIconPalette_Antidote},

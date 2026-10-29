@@ -748,3 +748,7 @@ const u32 gItemIcon_ParkBall[] = INCGFX_U32("graphics/items/icons/park_ball.png"
 const u32 gItemIconPalette_ParkBall[] = INCGFX_U32("graphics/items/icon_palettes/park_ball.pal", ".gbapal.lz");
 const u32 gItemIcon_CherishBall[] = INCGFX_U32("graphics/items/icons/cherish_ball.png", ".4bpp.lz");
 const u32 gItemIconPalette_CherishBall[] = INCGFX_U32("graphics/items/icon_palettes/cherish_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_DreamBall[] = INCGFX_U32("graphics/items/icons/dream_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_DreamBall[] = INCGFX_U32("graphics/items/icon_palettes/dream_ball.pal", ".gbapal.lz");
+const u32 gItemIcon_BeastBall[] = INCGFX_U32("graphics/items/icons/beast_ball.png", ".4bpp.lz");
+const u32 gItemIconPalette_BeastBall[] = INCGFX_U32("graphics/items/icon_palettes/beast_ball.pal", ".gbapal.lz");

@@ -5081,6 +5081,10 @@ extern const u32 gBallGfx_Park[];
 extern const u32 gBallPal_Park[];
 extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
+extern const u32 gBallGfx_Dream[];
+extern const u32 gBallPal_Dream[];
+extern const u32 gBallGfx_Beast[];
+extern const u32 gBallPal_Beast[];
 
 //sinnoh ball items
 extern const u32 gItemIcon_HealBall[];
@@ -5093,5 +5097,9 @@ extern const u32 gItemIcon_ParkBall[];
 extern const u32 gItemIconPalette_ParkBall[];
 extern const u32 gItemIcon_CherishBall[];
 extern const u32 gItemIconPalette_CherishBall[];
+extern const u32 gItemIcon_DreamBall[];
+extern const u32 gItemIconPalette_DreamBall[];
+extern const u32 gItemIcon_BeastBall[];
+extern const u32 gItemIconPalette_BeastBall[];
 
 #endif //GUARD_GRAPHICS_H

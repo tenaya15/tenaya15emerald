@@ -1575,3 +1575,13 @@ static const u8 sCherishBallDesc[] = _(
     "A rare ball crafted\n"
     "to commemorate a\n"
     "special occasion.");
+
+static const u8 sDreamBallDesc[] = _(
+    "A ball that works\n"
+    "better on Pokémon\n"
+    "that are asleep");
+
+static const u8 sBeastBallDesc[] = _(
+    "A special ball\n"
+    "designed to catch\n"
+    "Ultra Beasts.");

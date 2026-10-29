@@ -52,6 +52,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "rtc.h"
+#include "constants/species.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -9935,6 +9936,43 @@ static void Cmd_handleballthrow(void)
         else
             catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
 
+        if (gLastUsedItem == ITEM_BEAST_BALL)
+        {
+            switch (gBattleMons[gBattlerTarget].species)
+            {
+				#ifdef SPECIES_NECROZMA
+				    case SPECIES_NIHILEGO:
+				    case SPECIES_BUZZWHOLE:
+				    case SPECIES_PHEROMOSA:
+				    case SPECIES_XURKITREE:
+				    case SPECIES_CELESTEELA:
+				    case SPECIES_KARTANA:
+				    case SPECIES_GUZZLORD:
+				    case SPECIES_POIPOLE:
+				    case SPECIES_NAGANADEL:
+				    case SPECIES_STAKATAKA:
+				    case SPECIES_BLACEPHALON:
+		                ballMultiplier = 50;
+                    break;
+
+                    default:
+                        ballMultiplier = 1;
+                    break;
+				#else
+                    case SPECIES_RAIKOU:
+                    case SPECIES_ENTEI:
+                    case SPECIES_SUICUNE:
+                        catchRate = (gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate * 30);
+		                ballMultiplier = 15;
+                    break;
+
+                    default:
+                        ballMultiplier = 1;
+                    break;
+				#endif
+            }
+        }
+
         if (gLastUsedItem > ITEM_SAFARI_BALL)
         {
             switch (gLastUsedItem)
@@ -10003,7 +10041,12 @@ static void Cmd_handleballthrow(void)
             case ITEM_CHERISH_BALL:
                 ballMultiplier = 0;
                 break;
-// sinnoh balls end
+            case ITEM_DREAM_BALL:
+                if (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP)
+                    ballMultiplier = 40;
+                else
+                    ballMultiplier = 10;
+                break;
             }
         }
         else

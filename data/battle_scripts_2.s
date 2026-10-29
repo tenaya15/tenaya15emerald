@@ -31,6 +31,8 @@ gBattlescriptsForBallThrow::
 	.4byte BattleScript_BallThrow        @ ITEM_QUICK_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_PARK_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_CHERISH_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_DREAM_BALL
+	.4byte BattleScript_BallThrow        @ ITEM_BEAST_BALL
 
 	.align 2
 gBattlescriptsForUsingItem::

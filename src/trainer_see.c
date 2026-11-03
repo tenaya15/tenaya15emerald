@@ -18,6 +18,10 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/trainer_types.h"
+#include "field_weather.h"
+
+extern const struct SpritePalette sObjectEventSpritePalettes[];
+extern const struct SpritePalette gObjectEventPal_Npc1;
 
 // this file's functions
 static u8 CheckTrainer(u8 objectEventId);

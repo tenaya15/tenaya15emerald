@@ -51,6 +51,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "rtc.h"
+#include "constants/species.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -9934,6 +9936,36 @@ static void Cmd_handleballthrow(void)
         else
             catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
 
+        if (gLastUsedItem == ITEM_BEAST_BALL)
+        {
+            switch (gBattleMons[gBattlerTarget].species)
+            {
+				#ifdef SPECIES_NIHILEGO
+				    case SPECIES_NIHILEGO:
+				    case SPECIES_BUZZWHOLE:
+				    case SPECIES_PHEROMOSA:
+				    case SPECIES_XURKITREE:
+				    case SPECIES_CELESTEELA:
+				    case SPECIES_KARTANA:
+				    case SPECIES_GUZZLORD:
+				    case SPECIES_POIPOLE:
+				    case SPECIES_NAGANADEL:
+				    case SPECIES_STAKATAKA:
+				    case SPECIES_BLACEPHALON:
+		                ballMultiplier = 50;
+                    break;
+
+                    default:
+                        ballMultiplier = 1;
+                    break;
+				#else
+                    default:
+                        ballMultiplier = 1;
+                    break;
+				#endif
+            }
+        }
+
         if (gLastUsedItem > ITEM_SAFARI_BALL)
         {
             switch (gLastUsedItem)
@@ -9977,6 +10009,67 @@ static void Cmd_handleballthrow(void)
             case ITEM_PREMIER_BALL:
                 ballMultiplier = 10;
                 break;
+            case ITEM_HEAL_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_DUSK_BALL:
+                RtcCalcLocalTime();
+                if ((gLocalTime.hours >= 20 && gLocalTime.hours <= 3) || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
+                    ballMultiplier = 35;
+                else
+                    ballMultiplier = 10;
+                break;
+            case ITEM_QUICK_BALL:
+                if (gBattleResults.battleTurnCounter == 0)
+                    ballMultiplier = 40;
+                else
+                    ballMultiplier = 10;
+                break;
+            case ITEM_PARK_BALL:
+// set map type as MAP_TYPE_UNKNOWN in porymap
+                if (GetCurrentMapType() == MAP_TYPE_UNKNOWN)
+                    ballMultiplier = 35;
+                break;
+            case ITEM_CHERISH_BALL:
+                ballMultiplier = 0;
+                break;
+            case ITEM_DREAM_BALL:
+                if (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP)
+                    ballMultiplier = 40;
+                else
+                    ballMultiplier = 10;
+                break;
+// placeholders for the following until effects are created
+            case ITEM_LEVEL_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_LURE_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_MOON_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_LOVE_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_FAST_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_HEAVY_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_FRIEND_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_SPORT_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_STRANGE_BALL:
+                ballMultiplier = 10;
+                break;
+            case ITEM_GS_BALL:
+                ballMultiplier = 10;
+                break;
             }
         }
         else
@@ -10017,7 +10110,19 @@ static void Cmd_handleballthrow(void)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
             else
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+
+// heal ball start
+            if (gLastUsedItem == ITEM_HEAL_BALL)
+            {
+                MonRestorePP(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], gBattlerPartyIndexes[gBattlerTarget], STATUS1_ANY, gBattlerTarget);
+                gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
+                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
+            }
+// heal ball end
+
         }
+
         else // mon may be caught, calculate shakes
         {
             u8 shakes;
@@ -10042,6 +10147,17 @@ static void Cmd_handleballthrow(void)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 else
                     gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+
+// heal ball start
+                if (gLastUsedItem == ITEM_HEAL_BALL)
+                {
+                    MonRestorePP(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                    HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], gBattlerPartyIndexes[gBattlerTarget], STATUS1_ANY, gBattlerTarget);
+                    gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
+                }
+// heal ball end
+
             }
             else // not caught
             {

@@ -169,6 +169,256 @@ const struct Item gItems[] =
         .secondaryId = ITEM_PREMIER_BALL - FIRST_BALL,
     },
 
+// new balls
+    [ITEM_HEAL_BALL] =
+    {
+        .name = _("HEAL BALL"),
+        .itemId = ITEM_HEAL_BALL,
+        .price = 1000,
+        .description = sHealBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_HEAL_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_HEAL_BALL - FIRST_BALL,
+    },
+	
+    [ITEM_DUSK_BALL] =
+    {
+        .name = _("DUSK BALL"),
+        .itemId = ITEM_DUSK_BALL,
+        .price = 1000,
+        .description = sDuskBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_DUSK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_DUSK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_QUICK_BALL] =
+    {
+        .name = _("QUICK BALL"),
+        .itemId = ITEM_QUICK_BALL,
+        .price = 1000,
+        .description = sQuickBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_QUICK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_QUICK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_PARK_BALL] =
+    {
+        .name = _("PARK BALL"),
+        .itemId = ITEM_PARK_BALL,
+        .price = 1000,
+        .description = sParkBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_PARK_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_PARK_BALL - FIRST_BALL,
+    },
+
+    [ITEM_CHERISH_BALL] =
+    {
+        .name = _("CHERISH BALL"),
+        .itemId = ITEM_CHERISH_BALL,
+        .price = 100,
+        .description = sCherishBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_PARTY_MENU,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_CHERISH_BALL - FIRST_BALL,
+    },
+
+/* Use if Cherish Ball is to be used as a Key Item instead and remove the above entry
+    [ITEM_CHERISH_BALL] =
+    {
+        .name = _("CHERISH BALL"),
+        .itemId = ITEM_CHERISH_BALL,
+        .price = 0,
+        .description = sCherishBallDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+*/
+
+    [ITEM_DREAM_BALL] =
+    {
+        .name = _("DREAM BALL"),
+        .itemId = ITEM_DREAM_BALL,
+        .price = 1000,
+        .description = sDreamBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_DREAM_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_DREAM_BALL - FIRST_BALL,
+    },
+
+    [ITEM_BEAST_BALL] =
+    {
+        .name = _("BEAST BALL"),
+        .itemId = ITEM_BEAST_BALL,
+        .price = 10000,
+        .description = sBeastBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_BEAST_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_BEAST_BALL - FIRST_BALL,
+    },
+
+    [ITEM_LEVEL_BALL] =
+    {
+        .name = _("LEVEL BALL"),
+        .itemId = ITEM_LEVEL_BALL,
+        .price = 1000,
+        .description = sLevelBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_LEVEL_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_LEVEL_BALL - FIRST_BALL,
+    },
+
+    [ITEM_LURE_BALL] =
+    {
+        .name = _("LURE BALL"),
+        .itemId = ITEM_LURE_BALL,
+        .price = 1000,
+        .description = sLureBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_LURE_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_LURE_BALL - FIRST_BALL,
+    },
+
+    [ITEM_MOON_BALL] =
+    {
+        .name = _("MOON BALL"),
+        .itemId = ITEM_MOON_BALL,
+        .price = 1000,
+        .description = sMoonBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_MOON_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_MOON_BALL - FIRST_BALL,
+    },
+
+    [ITEM_FRIEND_BALL] =
+    {
+        .name = _("FRIEND BALL"),
+        .itemId = ITEM_FRIEND_BALL,
+        .price = 1000,
+        .description = sFriendBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_FRIEND_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_FRIEND_BALL - FIRST_BALL,
+    },
+
+    [ITEM_LOVE_BALL] =
+    {
+        .name = _("LOVE BALL"),
+        .itemId = ITEM_LOVE_BALL,
+        .price = 1000,
+        .description = sLoveBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_LOVE_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_LOVE_BALL - FIRST_BALL,
+    },
+
+    [ITEM_FAST_BALL] =
+    {
+        .name = _("FAST BALL"),
+        .itemId = ITEM_FAST_BALL,
+        .price = 1000,
+        .description = sFastBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_FAST_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_FAST_BALL - FIRST_BALL,
+    },
+
+    [ITEM_SPORT_BALL] =
+    {
+        .name = _("SPORT BALL"),
+        .itemId = ITEM_SPORT_BALL,
+        .price = 1000,
+        .description = sSportBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_SPORT_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_SPORT_BALL - FIRST_BALL,
+    },
+
+    [ITEM_HEAVY_BALL] =
+    {
+        .name = _("HEAVY BALL"),
+        .itemId = ITEM_HEAVY_BALL,
+        .price = 1000,
+        .description = sHeavyBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_HEAVY_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_HEAVY_BALL - FIRST_BALL,
+    },
+
+    [ITEM_STRANGE_BALL] =
+    {
+        .name = _("STRANGE BALL"),
+        .itemId = ITEM_STRANGE_BALL,
+        .price = 100,
+        .description = sStrangeBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_STRANGE_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_STRANGE_BALL - FIRST_BALL,
+    },
+
+    [ITEM_GS_BALL] =
+    {
+        .name = _("GS BALL"),
+        .itemId = ITEM_GS_BALL,
+        .price = 100,
+        .description = sGSBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_GS_BALL - FIRST_BALL,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = ITEM_GS_BALL - FIRST_BALL,
+    },
+
+/* Use if GS Ball is to be used as a Key Item instead and remove the above entry
+    [ITEM_GS_BALL] =
+    {
+        .name = _("GS BALL"),
+        .itemId = ITEM_GS_BALL,
+        .price = 0,
+        .description = sGSBallDesc,
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    },
+*/
+
 // Medicine
 
     [ITEM_POTION] =

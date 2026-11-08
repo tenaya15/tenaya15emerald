@@ -1549,3 +1549,89 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+
+// new pokeballs
+static const u8 sHealBallDesc[] = _(
+    "A remedial ball\n"
+    "that restores\n"
+    "caught Pokémon.");
+
+static const u8 sDuskBallDesc[] = _(
+    "A ball that works\n"
+    "better at night\n"
+    "or in dark places.");
+
+static const u8 sQuickBallDesc[] = _(
+    "A ball that works\n"
+    "better at the\n"
+    "start of a battle.");
+
+static const u8 sParkBallDesc[] = _(
+    "A special ball\n"
+    "used only in\n"
+    "the Pal Park.");
+
+static const u8 sCherishBallDesc[] = _(
+    "A rare ball crafted\n"
+    "to commemorate a\n"
+    "special occasion.");
+
+static const u8 sDreamBallDesc[] = _(
+    "A ball that works\n"
+    "better on Pokémon\n"
+    "that are asleep.");
+
+static const u8 sBeastBallDesc[] = _(
+    "A special ball\n"
+    "designed to catch\n"
+    "Ultra Beasts.");
+
+static const u8 sLevelBallDesc[] = _(
+    "A ball that works\n"
+    "better on lower\n"
+    "level Pokémon.");
+
+static const u8 sLureBallDesc[] = _(
+    "A ball that works\n"
+    "better on Pokémon\n"
+    "hooked by a rod.");
+
+static const u8 sMoonBallDesc[] = _(
+    "A ball that works\n"
+    "better on Moon\n"
+    "Stone evolvers.");
+
+static const u8 sFriendBallDesc[] = _(
+    "A ball that makes\n"
+    "caught Pokémon\n"
+    "more friendly.");
+
+static const u8 sLoveBallDesc[] = _(
+    "A ball that works\n"
+    "better on the\n"
+    "opposite gender.");
+
+static const u8 sFastBallDesc[] = _(
+    "A ball that works\n"
+    "better on fast\n"
+    "Pokémon.");
+
+static const u8 sHeavyBallDesc[] = _(
+    "A ball that works\n"
+    "better on very\n"
+    "heavy Pokémon.");
+
+static const u8 sSportBallDesc[] = _(
+    "A special ball\n"
+    "used in the Bug\n"
+    "Catching Contest.");
+
+static const u8 sStrangeBallDesc[] = _(
+    "A ball that has\n"
+    "traveled across\n"
+    "space and time.");
+
+static const u8 sGSBallDesc[] = _(
+    "A ball that has\n"
+    "a connection to\n"
+    "Ilex Shrine.");

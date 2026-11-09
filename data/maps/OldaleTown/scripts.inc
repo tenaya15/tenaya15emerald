@@ -25,8 +25,34 @@ OldaleTown_EventScript_MoveMartEmployee::
 	setobjectmovementtype LOCALID_OLDALE_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
+Location_EventScript_Mon::
+	setwildbattle SPECIES_PICHU, 4
+	dowildbattle
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Location_EventScript_DefeatedMon
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Location_EventScript_DefeatedMon
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Location_EventScript_DefeatedMon
+	release
+	end
+
+Location_EventScript_DefeatedMon::
+	end
+	
 OldaleTown_EventScript_TownSign::
+additem ITEM_FRIEND_BALL, 30
+
+/*
+additem ITEM_LEVEL_BALL, 30
+additem ITEM_LURE_BALL, 30
+additem ITEM_LOVE_BALL, 30
+additem ITEM_FAST_BALL, 30
+additem ITEM_HEAVY_BALL, 30
+additem ITEM_SPORT_BALL, 30
+additem ITEM_STRANGE_BALL, 30
+additem ITEM_GS_BALL, 30
+*/
 	msgbox OldaleTown_Text_TownSign, MSGBOX_SIGN
+goto Location_EventScript_Mon
 	end
 
 OldaleTown_EventScript_Girl::

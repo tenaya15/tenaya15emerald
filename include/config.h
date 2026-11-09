@@ -55,4 +55,8 @@
 #endif
 #endif
 
+// Moon Ball catch effects
+// uncomment to change Moon Ball multiplier for all family of moon stone evolvers; else default, boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
+//#define MOON_BALL_GEN_4     
+
 #endif // GUARD_CONFIG_H

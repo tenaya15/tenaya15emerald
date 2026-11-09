@@ -9960,9 +9960,54 @@ static void Cmd_handleballthrow(void)
                     break;
 				#else
                     default:
-                        ballMultiplier = 1;
+                        ballMultiplier = 10;
                     break;
 				#endif
+            }
+        }
+
+        // Default/Gen 6+ effects: boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
+        // Gen 4 effects: boosted multiplier for all evolution family of moon stone evolvers (MOON_BALL_GEN_4 must be defined)
+        if (gLastUsedItem == ITEM_MOON_BALL)
+        {
+            switch (gBattleMons[gBattlerTarget].species)
+            {
+            #ifdef MOON_BALL_GEN_4
+				#ifdef SPECIES_MUNNA
+                    case SPECIES_MUNNA:
+					case SPECIES_MUSHARNA:
+                #endif
+                    case SPECIES_NIDORAN_F:
+                    case SPECIES_NIDORINA:
+                    case SPECIES_NIDOQUEEN:
+                    case SPECIES_NIDORAN_M:
+                    case SPECIES_NIDORINO:
+                    case SPECIES_NIDOKING:
+                    case SPECIES_CLEFFA:
+                    case SPECIES_CLEFAIRY:
+                    case SPECIES_CLEFABLE:
+                    case SPECIES_IGGLYBUFF:
+                    case SPECIES_JIGGLYPUFF:
+                    case SPECIES_WIGGLYTUFF:
+                    case SPECIES_SKITTY:
+                    case SPECIES_DELCATTY:
+            #else
+				#ifdef SPECIES_MUNNA
+                    case SPECIES_MUNNA:
+					case SPECIES_MUSHARNA:
+                #endif
+                    case SPECIES_NIDORINA:
+                    case SPECIES_NIDORINO:
+                    case SPECIES_CLEFAIRY:
+                    case SPECIES_JIGGLYPUFF:
+                    case SPECIES_SKITTY:
+            #endif
+		                ballMultiplier = 40;
+                    break;
+
+                    default:
+                        ballMultiplier = 10;
+                    break;
             }
         }
 
@@ -10046,9 +10091,7 @@ static void Cmd_handleballthrow(void)
             case ITEM_LURE_BALL:
                 ballMultiplier = 10;
                 break;
-            case ITEM_MOON_BALL:
-                ballMultiplier = 10;
-                break;
+// moon ball above
             case ITEM_LOVE_BALL:
                 ballMultiplier = 10;
                 break;
@@ -10121,6 +10164,14 @@ static void Cmd_handleballthrow(void)
             }
 // heal ball end
 
+// friend ball start
+            else if (gLastUsedItem == ITEM_FRIEND_BALL)
+            {
+                u32 friendship = 200;
+                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_FRIENDSHIP, &friendship);
+
+            }
+//friend ball end
         }
 
         else // mon may be caught, calculate shakes
@@ -10157,6 +10208,15 @@ static void Cmd_handleballthrow(void)
                     SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
                 }
 // heal ball end
+
+// friend ball start
+                else if (gLastUsedItem == ITEM_FRIEND_BALL)
+                {
+                    u32 friendship = 200;
+                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_FRIENDSHIP, &friendship);
+
+                }
+// friend ball end
 
             }
             else // not caught

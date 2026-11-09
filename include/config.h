@@ -73,4 +73,8 @@
 // uncomment to change Sport Ball to a x1 modifier that can catch pokemon anywhere (like a normal poke ball)
 //#define SPORT_BALL_MODIFIER
 
+// Heavy Ball catch effects
+// uncomment to change to Gen 4 effects: if (i < 2048), ballAddition = -20; if (i < 3072), ballAddition = 20; if (i < 4096), ballAddition = 30; else ballAddition = 40;
+//#define HEAVY_BALL_MODIFIER
+
 #endif // GUARD_CONFIG_H

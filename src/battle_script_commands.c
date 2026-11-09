@@ -9908,6 +9908,7 @@ static void Cmd_removelightscreenreflect(void)
 static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
+    u8 ballAddition = 0;
 
     if (gBattleControllerExecFlags)
         return;
@@ -10126,10 +10127,35 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_FAST_BALL:
-                ballMultiplier = 10;
+                if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
+                    ballMultiplier = 40;
+                else
+                    ballMultiplier = 10;
                 break;
             case ITEM_HEAVY_BALL:
-                ballMultiplier = 10;
+                i = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), 1);
+                #ifdef HEAVY_BALL_MODIFIER
+                    if (i < 2048)
+                        ballAddition = -20;
+                    else if (i < 3072)
+                        ballAddition = 20;
+                    else if (i < 4096)
+                        ballAddition = 30;
+                    else
+                        ballAddition = 40;
+                #else
+                    if (i < 1024)
+                        ballAddition = -20;
+                    else if (i < 2048)
+                        ballAddition = 0;
+                    else if (i < 3072)
+                        ballAddition = 20;
+                    else if (i < 4096)
+                        ballAddition = 30;
+                    else
+                        ballAddition = 40;
+                #endif
+                    ballMultiplier = 10;
                 break;
             case ITEM_FRIEND_BALL:
                 ballMultiplier = 10;
@@ -10155,6 +10181,13 @@ static void Cmd_handleballthrow(void)
         {
             ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
         }
+
+// heavy ball additions
+        // catchRate is unsigned, which means that it may potentially overflow if sum is applied directly.
+        if (catchRate + ballAddition <= 1)
+            catchRate = 1;
+        else
+            catchRate = catchRate + ballAddition;
 
         odds = (catchRate * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)

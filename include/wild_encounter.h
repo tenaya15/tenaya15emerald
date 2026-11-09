@@ -37,4 +37,6 @@ u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 
+extern bool8 gIsFishingEncounter;
+
 #endif // GUARD_WILD_ENCOUNTER_H

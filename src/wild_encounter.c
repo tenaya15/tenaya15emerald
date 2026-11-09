@@ -777,10 +777,13 @@ bool8 DoesCurrentMapHaveFishingMons(void)
         return FALSE;
 }
 
+EWRAM_DATA bool8 gIsFishingEncounter = 0;
+
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
-
+    gIsFishingEncounter = TRUE;
+	
     if (CheckFeebas() == TRUE)
     {
         u8 level = ChooseWildMonLevel(&sWildFeebas);

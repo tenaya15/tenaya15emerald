@@ -53,6 +53,7 @@
 #include "constants/trainers.h"
 #include "rtc.h"
 #include "constants/species.h"
+#include "wild_encounter.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -10089,8 +10090,15 @@ static void Cmd_handleballthrow(void)
                 ballMultiplier = 10;
                 break;
             case ITEM_LURE_BALL:
-                ballMultiplier = 10;
-                break;
+                if (gIsFishingEncounter)
+					#ifdef LURE_BALL_GEN_7
+                        ballMultiplier = 50;
+                    #else
+                        ballMultiplier = 30;
+                    #endif
+                else
+                    ballMultiplier = 0;
+                    break;
 // moon ball above
             case ITEM_LOVE_BALL:
                 ballMultiplier = 10;

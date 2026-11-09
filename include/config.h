@@ -56,7 +56,14 @@
 #endif
 
 // Moon Ball catch effects
-// uncomment to change Moon Ball multiplier for all family of moon stone evolvers; else default, boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
-//#define MOON_BALL_GEN_4     
+// uncomment to change Moon Ball multiplier to x4 for all family of moon stone evolvers; else default, boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
+//#define MOON_BALL_GEN_4
+
+// Lure Ball catch effects
+// uncomment to change Lure Ball multiplier to x5 for all fishing encounters
+//#define LURE_BALL_GEN_7
+
+
+
 
 #endif // GUARD_CONFIG_H

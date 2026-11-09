@@ -55,15 +55,22 @@
 #endif
 #endif
 
+// Alternate Ball Catch Effects
+
 // Moon Ball catch effects
 // uncomment to change Moon Ball multiplier to x4 for all family of moon stone evolvers; else default, boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
-//#define MOON_BALL_GEN_4
+//#define MOON_BALL_MODIFIER
 
 // Lure Ball catch effects
 // uncomment to change Lure Ball multiplier to x5 for all fishing encounters
-//#define LURE_BALL_GEN_7
+//#define LURE_BALL_MODIFIER
 
+// Love Ball catch effects
+// uncomment to change Love Ball to where you don't need to be the same species, only the opposite gender to the wild pokemon
+//#define LOVE_BALL_MODIFIER
 
-
+// Sport Ball catch effects
+// uncomment to change Sport Ball to a x1 modifier that can catch pokemon anywhere (like a normal poke ball)
+//#define SPORT_BALL_MODIFIER
 
 #endif // GUARD_CONFIG_H

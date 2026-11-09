@@ -9929,7 +9929,7 @@ static void Cmd_handleballthrow(void)
     }
     else
     {
-        u32 odds;
+        u32 odds, i;
         u8 catchRate;
 
         if (gLastUsedItem == ITEM_SAFARI_BALL)
@@ -9968,12 +9968,12 @@ static void Cmd_handleballthrow(void)
         }
 
         // Default/Gen 6+ effects: boosted multiplier only for Nidorina / Nidorino / Clefairy / Jigglypuff / Skitty / Munna (if defined)
-        // Gen 4 effects: boosted multiplier for all evolution family of moon stone evolvers (MOON_BALL_GEN_4 must be defined)
+        // Gen 4 effects: boosted multiplier for all evolution family of moon stone evolvers (MOON_BALL_MODIFIER must be defined)
         if (gLastUsedItem == ITEM_MOON_BALL)
         {
             switch (gBattleMons[gBattlerTarget].species)
             {
-            #ifdef MOON_BALL_GEN_4
+            #ifdef MOON_BALL_MODIFIER
 				#ifdef SPECIES_MUNNA
                     case SPECIES_MUNNA:
 					case SPECIES_MUSHARNA:
@@ -10072,7 +10072,7 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 10;
                 break;
             case ITEM_PARK_BALL:
-// set map type as MAP_TYPE_UNKNOWN in porymap
+            // set map type as MAP_TYPE_UNKNOWN in porymap
                 if (GetCurrentMapType() == MAP_TYPE_UNKNOWN)
                     ballMultiplier = 35;
                 break;
@@ -10085,13 +10085,19 @@ static void Cmd_handleballthrow(void)
                 else
                     ballMultiplier = 10;
                 break;
-// placeholders for the following until effects are created
             case ITEM_LEVEL_BALL:
-                ballMultiplier = 10;
+                if (gBattleMons[gBattlerAttacker].level >= 4 * gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 80;
+                else if (gBattleMons[gBattlerAttacker].level > 2 * gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 40;
+                else if (gBattleMons[gBattlerAttacker].level > gBattleMons[gBattlerTarget].level)
+                    ballMultiplier = 20;
+                else
+                    ballMultiplier = 10;
                 break;
             case ITEM_LURE_BALL:
                 if (gIsFishingEncounter)
-					#ifdef LURE_BALL_GEN_7
+					#ifdef LURE_BALL_MODIFIER
                         ballMultiplier = 50;
                     #else
                         ballMultiplier = 30;
@@ -10099,9 +10105,25 @@ static void Cmd_handleballthrow(void)
                 else
                     ballMultiplier = 0;
                     break;
-// moon ball above
             case ITEM_LOVE_BALL:
-                ballMultiplier = 10;
+                #ifdef LOVE_BALL_MODIFIER
+                    u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
+
+                    if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
+                        ballMultiplier = 80;
+                #else
+                if (gBattleMons[gBattlerTarget].species == gBattleMons[gBattlerAttacker].species)
+                {
+                    u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
+                    u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
+
+                    if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
+                        ballMultiplier = 80;
+                }
+				#endif
+                else
+                    ballMultiplier = 10;
                 break;
             case ITEM_FAST_BALL:
                 ballMultiplier = 10;
@@ -10113,7 +10135,13 @@ static void Cmd_handleballthrow(void)
                 ballMultiplier = 10;
                 break;
             case ITEM_SPORT_BALL:
+			#ifdef SPORT_BALL_MODIFIER
                 ballMultiplier = 10;
+            #else
+            // set map type to `MAP_TYPE_UNKNOWN` in porymap
+                if (GetCurrentMapType() == MAP_TYPE_UNKNOWN)
+                    ballMultiplier = 15;
+            #endif
                 break;
             case ITEM_STRANGE_BALL:
                 ballMultiplier = 10;

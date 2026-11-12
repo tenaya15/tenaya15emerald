@@ -10172,9 +10172,6 @@ static void Cmd_handleballthrow(void)
             case ITEM_STRANGE_BALL:
                 ballMultiplier = 10;
                 break;
-            case ITEM_GS_BALL:
-                ballMultiplier = 10;
-                break;
             }
         }
         else
@@ -10182,12 +10179,13 @@ static void Cmd_handleballthrow(void)
             ballMultiplier = sBallCatchBonuses[gLastUsedItem - ITEM_ULTRA_BALL];
         }
 
-// heavy ball additions
+// heavy ball additions start
         // catchRate is unsigned, which means that it may potentially overflow if sum is applied directly.
         if (catchRate + ballAddition <= 1)
             catchRate = 1;
         else
             catchRate = catchRate + ballAddition;
+// heavy ball additions end
 
         odds = (catchRate * ballMultiplier / 10)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
@@ -10198,7 +10196,12 @@ static void Cmd_handleballthrow(void)
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
             odds = (odds * 15) / 10;
 
-        if (gLastUsedItem != ITEM_SAFARI_BALL)
+// GS Ball code start
+        if (gLastUsedItem == ITEM_GS_BALL && gBattleMons[gBattlerTarget].species == SPECIES_CELEBI)
+            odds = 255;
+// GS Ball code end
+
+        if (gLastUsedItem != ITEM_SAFARI_BALL && gLastUsedItem != ITEM_GS_BALL)
         {
             if (gLastUsedItem == ITEM_MASTER_BALL)
             {

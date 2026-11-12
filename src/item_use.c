@@ -935,8 +935,24 @@ void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+static void Task_CloseGsBallMessage(u8 taskId)
+{
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
+    {
+        CloseItemMessage(taskId);
+    }
+}
+
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
+    static const u8 sTextGsBallWontWork[] = _("The GS Ball won't work on that pokemon.");
+
+    if (gSpecialVar_ItemId == ITEM_GS_BALL && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species != SPECIES_CELEBI)
+    {
+        DisplayItemMessage(taskId, FONT_NORMAL, sTextGsBallWontWork, Task_CloseGsBallMessage);
+        return;
+    }
+
     if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -947,7 +963,7 @@ void ItemUseInBattle_PokeBall(u8 taskId)
     }
     else if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
     {
-        DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, 0);
     }
     else
     {

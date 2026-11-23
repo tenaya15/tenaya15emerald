@@ -55,4 +55,15 @@
 #endif
 #endif
 
+// Shiny Odds
+// uncomment to change SHINY_ODDS to current Gen odds (1 in 4096) rather than vanilla (1 in 8192)
+//#define SHINY_ODDS_CURRENT_GEN
+
+// Shiny Charm
+// The amount of additional Shiny rolls if the player has the Shiny Charm. Set it to 0 to disable the Shiny Charm's effects.
+// examples:
+// 2 = 3 in 8192 / 1 in 2731 chance; Black2/White2 default
+// 7 = 8 in 8192 / 1 in 1024 chance
+#define SHINY_CHARM_ADDITIONAL_ROLLS   2
+
 #endif // GUARD_CONFIG_H

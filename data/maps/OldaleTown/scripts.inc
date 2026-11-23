@@ -26,6 +26,7 @@ OldaleTown_EventScript_MoveMartEmployee::
 	return
 
 OldaleTown_EventScript_TownSign::
+additem ITEM_SHINY_CHARM, 1
 	msgbox OldaleTown_Text_TownSign, MSGBOX_SIGN
 	end
 

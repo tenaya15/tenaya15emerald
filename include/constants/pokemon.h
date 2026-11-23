@@ -91,7 +91,12 @@
 #define MAX_STAT_STAGE    12
 
 // Shiny odds
-#define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
+// Actual probability is SHINY_ODDS/65536
+#ifdef SHINY_ODDS_CURRENT_GEN
+    #define SHINY_ODDS 16 // 1 in 4096
+#else
+    #define SHINY_ODDS 8  // (1 in 8192)
+#endif
 
 // Number of bits used to store each contest ribbon (the highest rank achieved)
 #define CONTEST_RIBBON_BITS 3

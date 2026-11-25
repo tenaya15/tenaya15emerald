@@ -56,6 +56,7 @@
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
+#include "constants/mugshots.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1056,3 +1057,15 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+
+// Mugshot Example
+EventScript_Mugshot_Example::
+	setvar VAR_0x8000, MUGSHOT_WALLY
+	special DrawMugshot
+	msgbox Text_Mugshot_Example, MSGBOX_NPC
+	special ClearMugshot
+	end
+
+Text_Mugshot_Example:
+	.string "Hi.$"

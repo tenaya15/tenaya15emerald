@@ -5512,6 +5512,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
     u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
+    u16 status;
 
     if (heldItem == ITEM_ENIGMA_BERRY)
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -5579,6 +5580,13 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem)
                 break;
             case EVO_BEAUTY:
                 if (gEvolutionTable[species][i].param <= beauty)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+// evolve with status effect at specified level; param2 = status
+            case EVO_LEVEL_STATUS:
+                status = GetMonData(mon, MON_DATA_STATUS, 0);
+
+                if (gEvolutionTable[species][i].param2 == status && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
